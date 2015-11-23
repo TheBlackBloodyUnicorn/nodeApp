@@ -28,7 +28,7 @@ http.createServer(function(request, response) {
             response.write('Connection established to' + url +"\n");
 
             var collection = db.collection('users');
-            var results = collection.find({name: 'modulus user'});
+            var results = collection.find({age: {$lte:30}});
 
             results.each(function (err, result) {
                 if (result == null) {
