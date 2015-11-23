@@ -48,7 +48,6 @@ http.createServer(function(request, response) {
             });
 
         }
-        response.end('Finished, Connection closed \n');
     });
 
 }).listen(port);
