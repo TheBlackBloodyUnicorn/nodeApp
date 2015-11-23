@@ -28,20 +28,19 @@ http.createServer(function(request, response) {
             response.write('Connection established to' + url +"\n");
 
             var collection = db.collection('users');
-            var results = collection.find({age: {$lte:30}});
 
-            results.each(function (err, result) {
-                if (result == null) {
-                    response.end('Completed');
-                    db.close();
-                }else {
-                    if (err) {
-                        response.write(err);
-                    } else {
-                        response.write('Fetched: ' + result.name + " : " + result.age + " : " + result.roles.toString() + '\n');
-                    }
+            collection.update({name: 'modulus user'}, {$set: {enabled: false}}, function (err, numUpdated) {
+                if (err) {
+                    response.write(err);
+                } else if (numUpdated) {
+                    response.write ('Updated Successfully : ' + numUpdated + "\n");
+                } else {
+                    response.write ('No document found with defined "find" criteria!');
                 }
+                db.close;
+                response.end('DB closed');
             });
+
 
         }
 
